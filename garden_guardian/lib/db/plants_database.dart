@@ -31,7 +31,8 @@ class PlantsDatabase {
       CREATE TABLE $tablePlants (
         ${PlantFields.id} $idType,
         ${PlantFields.name} $textType,
-        ${PlantFields.type} $textType
+        ${PlantFields.type} $textType,
+        ${PlantFields.lastWatered} $textType
       )
      """);
   }
