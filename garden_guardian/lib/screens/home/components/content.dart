@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_guardian/db/plants_database.dart';
+import 'package:garden_guardian/screens/log_activity/log_activity_screen.dart';
 
 import '../../../models/plant.dart';
 import '../../add_plant/add_plant_screen.dart';
@@ -73,16 +74,23 @@ class _ContentState extends State<Content> {
             child: Card(
               elevation: 1,
               child: ListTile(
-                contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                title: Text(
-                  plant.name,
-                  style: TextStyle(fontSize: 16, color: Color(0xFF191C19)),
-                ),
-                subtitle: Text(
-                  plant.type,
-                  style: TextStyle(fontSize: 14, color: Color(0xFF191C19)),
-                ),
-              ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 12),
+                  title: Text(
+                    plant.name,
+                    style: TextStyle(fontSize: 16, color: Color(0xFF191C19)),
+                  ),
+                  subtitle: Text(
+                    plant.type,
+                    style: TextStyle(fontSize: 14, color: Color(0xFF191C19)),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                LogActivity(plantId: plant.id)));
+                    refreshPlants();
+                  }),
             ),
           );
         },
