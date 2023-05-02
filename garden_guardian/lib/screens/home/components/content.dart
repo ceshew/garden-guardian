@@ -68,6 +68,8 @@ class _ContentState extends State<Content> {
         itemCount: plants.length,
         itemBuilder: (context, index) {
           final plant = plants[index];
+          final DateTime dateWatered = plant.lastWatered ?? DateTime(2020);
+          bool watered = (plant.lastWatered?.isAfter(DateTime(2020)) ?? false);
 
           return SizedBox(
             height: 80,
@@ -83,12 +85,18 @@ class _ContentState extends State<Content> {
                     plant.type,
                     style: TextStyle(fontSize: 14, color: Color(0xFF191C19)),
                   ),
+                  trailing: watered
+                      ? Text(
+                          DateTime.now().add(Duration(days: 3)).difference(dateWatered).inDays.toString(),
+                          style: const TextStyle(
+                              fontSize: 14, color: Color(0xFF191C19)),
+                        )
+                      : null,
                   onTap: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                LogActivity(plantId: plant.id)));
+                            builder: (context) => LogActivity(plant: plant)));
                     refreshPlants();
                   }),
             ),

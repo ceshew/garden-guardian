@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:garden_guardian/db/plants_database.dart';
+
+import '../../models/plant.dart';
 
 class LogActivity extends StatefulWidget {
-  final int? plantId;
+  final Plant plant;
 
   const LogActivity({
     Key? key,
-    required this.plantId,
+    required this.plant,
   }) : super(key: key);
 
   @override
@@ -60,7 +62,15 @@ class _LogActivityState extends State<LogActivity> {
   }
 
   void logWatering() async {
-    print(DateTime.now());
+
+    final plant = Plant(
+      id: widget.plant.id,
+      name: widget.plant.name,
+      type: widget.plant.type,
+      lastWatered: DateTime.now(),
+    );
+
+    await PlantsDatabase.instance.update(plant);
 
     Navigator.pop(context);
   }
