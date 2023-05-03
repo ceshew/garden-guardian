@@ -87,7 +87,7 @@ class _ContentState extends State<Content> {
                   ),
                   trailing: watered
                       ? Text(
-                          DateTime.now().add(Duration(days: 3)).difference(dateWatered).inDays.toString(),
+                          DateTime.now().difference(dateWatered).inDays.toString(),
                           style: const TextStyle(
                               fontSize: 14, color: Color(0xFF191C19)),
                         )
